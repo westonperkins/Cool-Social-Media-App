@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const mongoURI = process.env.NODE_ENV === 'production'
 ? process.env.DB_URL
-: 'mongo://localhost/p2app'
+: 'mongodb://localhost/p2app'
 
 mongoose 
     .connect(mongoURI, {
