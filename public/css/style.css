@@ -1,0 +1,24 @@
+body {
+    background-color: white;
+}
+
+.mainContainer {
+    width: 90vw;
+    height: 90vh;
+    border: double black;
+    margin: 5vh auto;
+    overflow: scroll;
+    /* background-color: black; */
+    align-items: flex-start;
+    display: flex;
+}
+
+img {
+    width: 200px;
+}
+
+span {
+    font-size: 2rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}

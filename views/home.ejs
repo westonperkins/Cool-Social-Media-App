@@ -1,0 +1,12 @@
+<div class="mainContainer">
+
+<% posts.forEach((a) => { %>
+    <% if(a.url) { %>
+        <img src=" <%= a.url %>" alt="">
+   <% } else if(a.content) { %>
+        <span> <%= a.content %> </span>
+   <% } %>
+    <% console.log("tesdt" + a.content) %>
+<% }) %>
+
+</div>
