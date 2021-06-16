@@ -1,12 +1,15 @@
 <div class="mainContainer">
 
-<% posts.forEach((a) => { %>
-    <% if(a.url) { %>
-        <img src=" <%= a.url %>" alt="">
-   <% } else if(a.content) { %>
-        <span> <%= a.content %> </span>
+<% posts.forEach((post) => { %>
+    <% if(post.url) { %>
+        <a href="/edit"><img src=" <%= post.url %>" alt=""></a>
+   <% } else if(post.text) { %>
+        <a href="/edit"><span> <%= post.text %> </span></a>
    <% } %>
-    <% console.log("tesdt" + a.content) %>
 <% }) %>
 
+</div>
+<div class="navBar">
+    <a href="/create">Create</a>
+    <a href="/edit">Edit</a>
 </div>

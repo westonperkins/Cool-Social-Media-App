@@ -1,16 +1,25 @@
 body {
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.class {
+    justify-content: center;
+    align-items: center;
 }
 
 .mainContainer {
     width: 90vw;
     height: 90vh;
     border: double black;
-    margin: 5vh auto;
+    margin: 1vh auto;
     overflow: scroll;
     /* background-color: black; */
     align-items: flex-start;
     display: flex;
+    flex-wrap: wrap;
 }
 
 img {
@@ -20,5 +29,15 @@ img {
 span {
     font-size: 2rem;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    color: red;
+}
 
+.testing {
+    background-color: red;
+    background-size: cover;
+    
+}
+
+a {
+    text-decoration: none;
 }

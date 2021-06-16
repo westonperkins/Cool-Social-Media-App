@@ -1,8 +1,13 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const app = express()
 const ejsLayouts = require('express-ejs-layouts')
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
+
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 const feedController = require('./controllers/feed')
 const methodOverride = require('method-override')
@@ -17,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // app.use(express.static('public'))
 
-app.use(express.static(__dirname + "/public/css/"))
+app.use(express.static(__dirname + "/public"))
 
 
 
