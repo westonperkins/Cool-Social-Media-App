@@ -4,7 +4,7 @@ const router = express.Router()
 const Media = require('../models/media_model')
 
 router.get('/', (req, res) => {
-    Media.find({})
+    Media.find({}).sort({updatedAt:-1})
         .then((posts) => {
             res.render('home.ejs', { posts: posts })
         })

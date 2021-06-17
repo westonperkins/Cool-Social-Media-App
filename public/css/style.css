@@ -41,3 +41,11 @@ span {
 a {
     text-decoration: none;
 }
+
+.dropdown-trigger {
+    width: 5rem;
+    align-self: center;
+    color: red;
+    background-color: red !important;
+    border-radius: 100% !important;
+}

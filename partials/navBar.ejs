@@ -1,0 +1,18 @@
+<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Create</a>
+
+<!-- Modal Structure -->
+
+<form id="modal1" class="modal" action="/create" method="POST" style="display: flex; flex-direction: column; width: 25%; padding: 3rem;">
+    <label for="text">Type words:</label>
+    <input type="text" name="text" value="" id="text"> 
+    <label for="url">Media URL plz:</label>
+    <input type="text" name="url" id="url">
+    <input type="submit" name="" id="submit">
+</form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, {});
+  });
+</script>
