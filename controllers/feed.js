@@ -15,27 +15,38 @@ router.get('/data', (req, res) => {
         .then((data) => {
             res.json(data)
         })
-        .then(console.log(req.params))
 })
 
-router.get('/create', (req, res) => {
-    res.render("createTest")
-})
+
 
 router.post('/create', (req, res, next) => {
-    Media.create(req.body)
+    if(req.body.url != '' || req.body.text != '') {
+        Media.create(req.body)
         .then((media) => {
             console.log(media)
         })
         .then(res.redirect('/'))
         .then(console.log(req.body))
-        .then(console.log('test'))
+    } else {
+        console.log('must inc data')
+    }
 })
 
-router.get('/edit', (req, res) => {
-    res.render('testEdit')
+
+router.get('/edit/:id', (req, res) => {
+    res.render("createTest", {id : req.params.id})
 })
 
+router.put('/:id', (req, res, next) => {
+    let id = req.params.id
+    Media.updateOne({_id: id}, { $set: {text: req.body.text, url: req.body.url}})
+    .then((media) => {
+        console.log(media)
+    })
+    .then(res.redirect('/'))
+    console.log('put')
+    
+})
 
 
 

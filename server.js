@@ -6,14 +6,14 @@ app.set('view engine', 'ejs')
 app.use(ejsLayouts)
 
 const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
-const feedController = require('./controllers/feed')
 const methodOverride = require('method-override')
+app.use(methodOverride('_method'));
+const feedController = require('./controllers/feed')
 app.use('/', feedController)
 
-app.use(methodOverride('_method'));
 
 
 app.use(express.json())
