@@ -1,45 +1,26 @@
 <div class="mainContainer">
 
-<% posts.forEach((post,i) => { %>
+<% posts.forEach((post, i) => { %>
     <% if(post.url) { %>
-
     <a class="modal-trigger" href="#<%= i %>" data-id=" <%= post.id %> "><img src=" <%= post.url %>" alt=""></a>
-    
    <% } else if(post.text) { %>
-
     <a class=" modal-trigger" href="#<%= i %>" data-id=" <%= post.id %> "><span> <%= post.text %> </span></a>
-   
    <% } %>
 <% }) %>
-
 </div>
 
 
-
-<!-- prints id to the console -->
-<script>
-    const media = document.querySelectorAll('a')
-    for(let i = 0; i < media.length; i++) {
-        media[i].addEventListener('click', () => {
-            console.log(media[i].dataset.id)
-        })
-    }
-</script>
-
-
-
-
-
-
-
 <% posts.forEach((post, i) => { %>
-    <div id="<%= i %>" class="modal">
+<div id="<%= i %>" class="modal"  >
     <form id="test" class="modal-content" action="/<%= post.id %>?_method=PUT" method="POST" >
         <label for="text">Edit Text:</label>
         <input type="text" name="text" value="" id="text"> 
         <label for="url">Edit Media URL:</label>
         <input type="text" name="url" id="url">
-        <input type="submit" name="Edit" id="submit">
+        <input type="submit" class="btn" name="Edit" id="submit" value="Update">
+    </form>
+    <form class="modal-content" action="/<%= post.id %>?_method=DELETE" method="POST">
+        <button type="submit" class="btn">Delete</button>
     </form>
 </div>
 
@@ -51,12 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
 <% }) %>
 
 
 
-<%- include('../partials/navBar.ejs') %>
+
+<%- include('../partials/create.ejs') %>
 
 
 

@@ -4,6 +4,7 @@ const mediaSchema = new mongoose.Schema(
     {
         text: String,
         url: String,
+        uploads: { data: Buffer, contentType: String }
     },
     { timestamps: true },
 )

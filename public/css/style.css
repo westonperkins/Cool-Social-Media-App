@@ -26,11 +26,6 @@ img {
     width: 200px;
 }
 
-span {
-    font-size: 2rem;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color: red;
-}
 
 .testing {
     background-color: red;
@@ -45,7 +40,7 @@ a {
 .dropdown-trigger {
     width: 5rem;
     align-self: center;
-    color: red;
+    /* color: red; */
     background-color: red !important;
     border-radius: 100% !important;
 }
