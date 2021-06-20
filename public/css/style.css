@@ -16,10 +16,12 @@ body {
     border: double black;
     margin: 1vh auto;
     overflow: scroll;
-    /* background-color: black; */
+    background-color: white;
     align-items: flex-start;
     display: flex;
     flex-wrap: wrap;
+    display: flex;
+    justify-content: flex-start;
 }
 
 img {
@@ -30,7 +32,6 @@ img {
 .testing {
     background-color: red;
     background-size: cover;
-    
 }
 
 a {
@@ -43,4 +44,50 @@ a {
     /* color: red; */
     background-color: red !important;
     border-radius: 100% !important;
+}
+
+a.create {
+    width: 7rem;
+    margin: 0 auto;
+    background-color: orangered !important;
+}
+
+.btn {
+    background-color: orangered !important;
+}
+
+
+.test1 {
+    position: absolute;
+    z-index: -1;
+}
+
+img.imageContent {
+    object-fit: scale-down;
+    /* width: 1rem; */
+}
+
+img {
+    justify-content: flex-start;
+
+}
+
+.content {
+max-width: 4rem;
+}
+
+.textContent {
+    font-size: 3rem;
+    background-color: wheat;
+    /* border-bottom-left-radius: 15%;
+    border-top-left-radius: 15%;
+    border-top-right-radius: 15%;
+    border-bottom-right-radius: 15%; */
+    box-sizing: border-box;
+    margin-right: 1rem;
+}
+
+.localmedia {
+    font-size: .9rem !important;
+    color: black !important;
 }

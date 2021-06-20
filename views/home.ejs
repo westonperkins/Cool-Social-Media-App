@@ -1,43 +1,47 @@
+
 <div class="mainContainer">
+    <div>
+    <% posts.forEach((post, i) => { %>
+        <% if(post.url) { %>
+        <a class="modal-trigger content" href="#<%= i %>" data-id=" <%= post.id %> "><img class="imageContent" src=" <%= post.url %>" alt=""></a>
+    <% } else if(post.text) { %>
+        <a class=" modal-trigger content" href="#<%= i %>" data-id=" <%= post.id %> "><span class="textContent"> <%= post.text %> </span></a>
+    <% } else if (post.imageUpload) { %>
+        <a class=" modal-trigger content" href="#<%= i %>" data-id=" <%= post.id %> "><img src="data:image/<%=post.imageUpload.contentType%>;base64,<%=post.imageUpload.data.toString('base64')%>"> </a>
+        
+        <% } %>
+    <% }) %>
+    </div>
 
-<% posts.forEach((post, i) => { %>
-    <% if(post.url) { %>
-    <a class="modal-trigger" href="#<%= i %>" data-id=" <%= post.id %> "><img src=" <%= post.url %>" alt=""></a>
-   <% } else if(post.text) { %>
-    <a class=" modal-trigger" href="#<%= i %>" data-id=" <%= post.id %> "><span> <%= post.text %> </span></a>
-   <% } %>
-<% }) %>
+
+    <% posts.forEach((post, i) => { %>
+    <div id="<%= i %>" class="modal"  >
+        <form id="test" class="modal-content" action="/<%= post.id %>?_method=PUT" method="POST" >
+            <label for="text">Edit Text:</label>
+            <input type="text" name="text" value="" id="text"> 
+            <label for="url">Edit Media URL:</label>
+            <input type="text" name="url" id="url">
+            <input type="submit" class="btn" name="Edit" id="submit" value="Update">
+        </form>
+        <form class="modal-content" action="/<%= post.id %>?_method=DELETE" method="POST">
+            <button type="submit" class="btn">Delete</button>
+        </form>
+    </div>
 </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelector('.modal');
+            var instances = M.Modal.init(elems, {});
+            
+        });
+        </script>
 
-
-<% posts.forEach((post, i) => { %>
-<div id="<%= i %>" class="modal"  >
-    <form id="test" class="modal-content" action="/<%= post.id %>?_method=PUT" method="POST" >
-        <label for="text">Edit Text:</label>
-        <input type="text" name="text" value="" id="text"> 
-        <label for="url">Edit Media URL:</label>
-        <input type="text" name="url" id="url">
-        <input type="submit" class="btn" name="Edit" id="submit" value="Update">
-    </form>
-    <form class="modal-content" action="/<%= post.id %>?_method=DELETE" method="POST">
-        <button type="submit" class="btn">Delete</button>
-    </form>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelector('.modal');
-    var instances = M.Modal.init(elems, {});
-
-});
-</script>
-
-<% }) %>
-
-
-
+    <% }) %>
 
 <%- include('../partials/create.ejs') %>
+
+
+
 
 
 

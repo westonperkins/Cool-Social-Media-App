@@ -1,21 +1,30 @@
 
   <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Create</a>
+  <a class="btn-floating btn-large waves-effect waves-light red modal-trigger create" href="#modal1">+</a>
 
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
-        <form id="test" class="modal-content" action="/create" method="POST" >
+        <form id="test" class="modal-content" action="/create" method="POST"  enctype="multipart/form-data" >
             <label for="text">Type words:</label>
             <input type="text" name="text" value="" id="text"> 
             <label for="url">Media URL plz:</label>
             <input type="text" name="url" id="url">
-            <input type="submit" name="" id="submit" class="btn">
+            <div class="file-field input-field">
+              <div class="btn localmedia">
+                <span>Upload media</span>
+                <input type="file" name="imageUpload">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+            <input type="submit" name="" id="submit" class="btn waves-effect waves-light">
         </form>
 
 
 
 
-    <div class="container">
+    <!-- <div class="container">
       <% typeof msg != 'undefined' ? msg : '' %>
       <form action="/create" method="POST" class="modal-content" enctype="multipart/form-data">
         <div class="file-field input-field">
@@ -27,10 +36,14 @@
             <input class="file-path validate" type="text">
           </div>
         </div>
+        <div>
+          <label for="text">Type words:</label>
+          <input type="text" name="text" value="" id="text"> 
+        </div>
         <button type="submit" class="btn">Submit</button>
       </form>
     </div>
-  </div>
+  </div> -->
 
 
 

@@ -8,34 +8,36 @@ app.set('view engine', 'ejs')
 app.use(ejsLayouts)
 
 // storage engine
-const storage = multer.diskStorage({
-    destination: './public/uploads/',
-    filename: function(req, file, cb) {
-        cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname))
-    }
-});
+// const storage = multer.diskStorage({
+//     destination: './public/uploads/',
+//     filename: function(req, file, cb) {
+//         cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname))
+//     }
+// });
 
 // initialize upload 
-const upload = multer({
-    storage: storage,
-    limits:{fileSize: 10000000},
-    fileFilter: function(req, file, cb){
-        checkFileType(file, cb)
-    }
-}).single('imageSelect')
+// const upload = multer({
+//     storage: storage,
+//     limits:{fileSize: 10000000},
+//     fileFilter: function(req, file, cb){
+//         checkFileType(file, cb)
+//     }
+// }).single('imageUpload')
+
 
 // file type check
-function checkFileType(file, cb) {
-    const filetypes = /jpeg|jpg|png|gif|mp4/;
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = filetypes.test(file.mimetype);
 
-    if(mimetype && extname) {
-        return cb(null, true);
-    } else {
-        cb('Error:images only')
-    }
-}
+// function checkFileType(file, cb) {
+//     const filetypes = /jpeg|jpg|png|gif|mp4/;
+//     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+//     const mimetype = filetypes.test(file.mimetype);
+
+//     if(mimetype && extname) {
+//         return cb(null, true);
+//     } else {
+//         cb('Error:images only')
+//     }
+// }
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
