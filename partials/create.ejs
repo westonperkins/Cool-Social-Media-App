@@ -1,50 +1,49 @@
 
-  <!-- Modal Trigger -->
-  <a class="btn-floating btn-large waves-effect waves-light red modal-trigger create" href="#modal1">+</a>
-
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-        <form id="test" class="modal-content" action="/create" method="POST"  enctype="multipart/form-data" >
-            <label for="text">Type words:</label>
-            <input type="text" name="text" value="" id="text"> 
-            <label for="url">Media URL plz:</label>
-            <input type="text" name="url" id="url">
-            <div class="file-field input-field">
-              <div class="btn localmedia">
-                <span>Upload media</span>
-                <input type="file" name="imageUpload">
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
-              </div>
-            </div>
-            <input type="submit" name="" id="submit" class="btn waves-effect waves-light">
-        </form>
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large ">
+    <i class="waves-effect waves-light brown large material-icons">mode_edit</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating waves-effect waves-light black darken-1 modal-trigger" href="#modal2"><i class="material-icons">format_quote</i></a></li>
+    <li><a class="btn-floating waves-effect waves-light black modal-trigger" href="#modal3"><i class="material-icons">attach_file</i></a></li>
+    <li><a class="btn-floating waves-effect waves-light black  modal-trigger" href="#modal4"><i class="material-icons">publish</i></a></li>
+  </ul>
+</div>
 
 
 
+<div id="modal2" class="modal">
+  <form id="text" class="modal-content textForm" action="/create" method="POST"  enctype="multipart/form-data" >
+      <label for="text">Type words:</label>
+      <input type="text" name="text" value="" id="text"> 
+      <input type="submit" name="" id="submit" class="btn center-align waves-effect waves-light">
+  </form>
+</div>
 
-    <!-- <div class="container">
-      <% typeof msg != 'undefined' ? msg : '' %>
-      <form action="/create" method="POST" class="modal-content" enctype="multipart/form-data">
-        <div class="file-field input-field">
-          <div class="btn">
-            <span>File</span>
-            <input type="file" name="imageSelect">
-          </div>
-          <div class="file-path-wrapper">
-            <input class="file-path validate" type="text">
-          </div>
-        </div>
-        <div>
-          <label for="text">Type words:</label>
-          <input type="text" name="text" value="" id="text"> 
-        </div>
-        <button type="submit" class="btn">Submit</button>
-      </form>
-    </div>
-  </div> -->
+<div id="modal3" class="modal">
+  <form id="url" class="modal-content urlForm" action="/create2" method="POST"  enctype="multipart/form-data" >
+      <label for="url">Media URL plz:</label>
+      <input type="text" name="url" id="url">
+      <input type="submit" name="" id="submit" class="btn center-align waves-effect waves-light">
+  </form>
+</div>
 
+<div id="modal4" class="modal">
+  <form class="modal-content uploadForm" action="/create3" method="POST"  enctype="multipart/form-data" >
+    <div class="file-field input-field">
+      <div class="btn localmedia">
+        <span>Upload media</span>
+        <input type="file" name="imageUpload">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+                                        <input  name="text" > 
+                                        <input  name="url" >
+      </div>
+      <input type="submit" name="" id="submit" class="btn center-align waves-effect waves-light submitUpload">
+  </form>
+</div>
 
 
 
@@ -55,3 +54,13 @@
 
   });
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.fixed-action-btn');
+      var instances = M.FloatingActionButton.init(elems, {
+        direction: 'left',
+        hoverEnabled: false
+      });
+    });
+  </script>

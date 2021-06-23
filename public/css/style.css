@@ -42,18 +42,18 @@ a {
     width: 5rem;
     align-self: center;
     /* color: red; */
-    background-color: red !important;
+    /* background-color: red !important; */
     border-radius: 100% !important;
 }
 
 a.create {
     width: 7rem;
     margin: 0 auto;
-    background-color: orangered !important;
+    /* background-color: orangered !important; */
 }
 
 .btn {
-    background-color: orangered !important;
+    /* background-color: orangered !important; */
 }
 
 
@@ -91,3 +91,26 @@ max-width: 4rem;
     font-size: .9rem !important;
     color: black !important;
 }
+
+.imageHolder {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+
+.textContent,
+.imageContent,
+.content {
+    min-width: 15rem;
+}
+
+.uploadForm,
+.urlForm,
+.textForm {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+

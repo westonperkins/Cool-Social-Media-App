@@ -8,13 +8,13 @@ const Media = require('../models/media_model')
 
 const fileFilter = (req, file, cb) => {
 
-    //if the filetype is not right
-    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/gif') {
         cb(null, true)
     } else {
         cb(null, false)
     }
 }
+
 const upload = multer({
     storage: storage,
     limits: {
@@ -25,15 +25,38 @@ const upload = multer({
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.get('/', (req, res) => {
     Media.find({}).sort({updatedAt:-1})
         .then((posts) => {
             res.render('home.ejs', { posts: posts })
+            console.log(posts[posts.length-1])
         })
 })
 
+
 router.get('/data', (req, res) => {
-    Media.find({})
+    Media.find({}, {imageUpload: 0})
         .then((data) => {
             res.json(data)
         })
@@ -41,69 +64,92 @@ router.get('/data', (req, res) => {
 
 
 
-router.post('/create', upload.single('imageUpload'), (req, res, next) => {
+
+router.post('/create2', upload.single('imageUpload'),  (req, res, next) => {
     let product = {
         url: req.body.url,
         text: req.body.text,
     }
-    let product2
+    if(req.body.url != '') {
+        Media.create(product)
+        .then((media) => {
+            console.log(media)
+            console.log("ew")
+        })
+        .then(res.redirect('/'))
+        .then(console.log(req.body))
+    } else {
+        console.log('no')
+    }
+
+})
+
+
+router.post('/create3', upload.single('imageUpload'),  (req, res, next) => {
+    if(req.body.imageUpload != '') {
+        let product 
         if(req.file != undefined) {
-            product2 = {
+            product = {
                 url: req.body.url,
                 text: req.body.text,
                 imageUpload: {
                     data: req.file.buffer,
                     contentType: req.file.mimetype
                 },
+                upload: true,
+            }
         }
-    }
+        Media.create(product)
+        .then((media) => {
+            console.log(media)
+            console.log("error")
+        })
+        .then(res.redirect('/'))
+        .then(console.log(req.body))
+    } 
     
-    // console.log(req.file)
-    if(req.body.url != '' || req.body.text != '') {
+    else {
+        console.log('something wrong w post route')
+    }
+}) 
+
+
+
+router.post('/create', upload.single('imageUpload'),  (req, res, next) => {
+    let product = {
+        url: req.body.url,
+        text: req.body.text,
+    }
+
+    if(req.body.text != '') {
         Media.create(product)
         .then((media) => {
             console.log(media)
         })
         .then(res.redirect('/'))
-        .then(console.log(req.body))
-    } else if(req.body.imageUpload != '') {
-         Media.create(product2)
-        .then((media) => {
-            console.log(media)
-            console.log(media.imageUpload.data.buffer)
+        .then(console.log(req.body.text + " REQ"))
+        .catch((err) => {
+            console.log(err)
         })
-        .then(res.redirect('/'))
-        .then(console.log(req.body))
     } else {
-        console.log('must inc data')
+        console.log('no two')
     }
 })
 
 
 
-// Multer stuff
-// router.post('/create', (req, res) => {
-//     Media.upload(req, res, (err) => {
-//         if(err) {
-//             console.log(err)
-//         } else {
-//             if(req.file == "undefined" || req.file == null) {
-//                 console.log('eror no file selected')
-//             } else {
-//                 console.log('success')
-//             }
-//             console.log(req.file);
-//             res.send('test')
-//         }
-//     });
-//     // console.log(req.file)
-//     // res.redirect('/')
-// });
+
+// && (req.body.url[req.body.url.length-5] == "." || req.body.url[req.body.url.length-4] == ".")
 
 
-// router.get('/edit/:id', (req, res) => {
-//     res.render("createTest", {id : req.params.id})
-// })
+
+
+
+
+let a = 'heybeans.jpeg'
+console.log(a[a.length-5])
+
+
 
 router.put('/:id', (req, res, next) => {
     let id = req.params.id
@@ -129,6 +175,26 @@ router.delete('/:id', (req, res) => {
     })
     .then(res.redirect('/'))
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

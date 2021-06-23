@@ -1,27 +1,26 @@
 
 <div class="mainContainer">
-    <div>
+    <div class="imageHolder">
     <% posts.forEach((post, i) => { %>
         <% if(post.url) { %>
         <a class="modal-trigger content" href="#<%= i %>" data-id=" <%= post.id %> "><img class="imageContent" src=" <%= post.url %>" alt=""></a>
-    <% } else if(post.text) { %>
+    <% } else if (post.text) { %>
         <a class=" modal-trigger content" href="#<%= i %>" data-id=" <%= post.id %> "><span class="textContent"> <%= post.text %> </span></a>
-    <% } else if (post.imageUpload) { %>
-        <a class=" modal-trigger content" href="#<%= i %>" data-id=" <%= post.id %> "><img src="data:image/<%=post.imageUpload.contentType%>;base64,<%=post.imageUpload.data.toString('base64')%>"> </a>
-        
+    <% } else if (post.upload === true) { %>
+        <a class=" modal-trigger content" href="#<%= i %>" data-id=" <%= post.id %> "><img class="uploadContent" src="data:image/<%=post.imageUpload.contentType%>;base64,<%=post.imageUpload.data.toString('base64')%>"> </a>
         <% } %>
     <% }) %>
     </div>
-
+    
 
     <% posts.forEach((post, i) => { %>
-    <div id="<%= i %>" class="modal"  >
+    <div id="<%= i %>" class="modal updateModal"  >
         <form id="test" class="modal-content" action="/<%= post.id %>?_method=PUT" method="POST" >
             <label for="text">Edit Text:</label>
             <input type="text" name="text" value="" id="text"> 
             <label for="url">Edit Media URL:</label>
             <input type="text" name="url" id="url">
-            <input type="submit" class="btn" name="Edit" id="submit" value="Update">
+            <button type="submit" class="btn">Update</button>
         </form>
         <form class="modal-content" action="/<%= post.id %>?_method=DELETE" method="POST">
             <button type="submit" class="btn">Delete</button>
