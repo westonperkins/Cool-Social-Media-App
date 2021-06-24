@@ -4,12 +4,10 @@ body {
     flex-direction: column;
     
 }
-
 .class {
     justify-content: center;
     align-items: center;
 }
-
 .mainContainer {
     width: 90vw;
     height: 90vh;
@@ -23,111 +21,24 @@ body {
     display: flex;
     justify-content: flex-start;
 }
-
-img {
-    width: 200px;
-}
-
-
-.testing {
-    background-color: red;
-    background-size: cover;
-}
-
-a {
-    text-decoration: none;
-}
-
-.dropdown-trigger {
-    width: 5rem;
-    align-self: center;
-    /* color: red; */
-    /* background-color: red !important; */
-    border-radius: 100% !important;
-}
-
-a.create {
-    width: 7rem;
-    margin: 0 auto;
-    /* background-color: orangered !important; */
-}
-
-.btn {
-    /* background-color: orangered !important; */
-}
-
-
-.test1 {
-    position: absolute;
-    z-index: -1;
-}
-
-img.imageContent {
-    object-fit: scale-down;
-    /* width: 1rem; */
-}
-
-img {
-    justify-content: flex-start;
-
-}
-
 .content {
 max-width: 4rem;
 }
-
 .textContent {
-    font-size: 3rem;
+    font-size: 2rem;
     background-color: wheat;
-    /* border-bottom-left-radius: 15%;
-    border-top-left-radius: 15%;
-    border-top-right-radius: 15%;
-    border-bottom-right-radius: 15%; */
     box-sizing: border-box;
     margin-right: 1rem;
 }
-
-.localmedia {
-    font-size: .9rem !important;
-    color: black !important;
-}
-
 .imageHolder {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display: inline-block;
+    width: 100vw;
+    word-break: break-all
 }
-
-
-
-.textContent,
-.imageContent,
-.content {
-    min-width: 15rem;
+img {
+    max-height: 200px;
+    max-width: 200px;
 }
-
-.uploadForm,
-.urlForm,
-.textForm {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+span {
+    color: blue !important;
 }
-
-.updateModal {
-    display: flex;
-    flex-direction: row-reverse;
-}
-
-/* 
-.flag {
-    position: absolute;
-    left: 270px;
-    bottom: 90px;
-}
-
-.deleteBtn {
-    position: absolute;
-    left: 470px;
-    bottom: 88px;
-} */

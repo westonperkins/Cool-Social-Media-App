@@ -23,7 +23,7 @@ const upload = multer({
     fileFilter: fileFilter
 })
 
-
+// get route with conditional to check if the post has 5 flags
 router.get('/', (req, res) => {
     Media.find({}).sort({updatedAt:-1})
         .then((posts) => {
@@ -36,23 +36,18 @@ router.get('/', (req, res) => {
                         })
                         .then(res.redirect('/'))
                 }
-                    console.log(post["flag"])
             })    
             res.render('home.ejs', { posts: posts })
         })
 })
-
-
+// JSON route
 router.get('/data', (req, res) => {
     Media.find({}, {imageUpload: 0})
         .then((data) => {
             res.json(data)
         })
 })
-
-
-
-
+// URL create route
 router.post('/create2', upload.single('imageUpload'),  (req, res, next) => {
     let product = {
         url: req.body.url,
@@ -71,8 +66,7 @@ router.post('/create2', upload.single('imageUpload'),  (req, res, next) => {
     }
 
 })
-
-
+// imageUpload create route
 router.post('/create3', upload.single('imageUpload'),  (req, res, next) => {
     if(req.file != undefined) {
             product = {
@@ -97,9 +91,7 @@ router.post('/create3', upload.single('imageUpload'),  (req, res, next) => {
         console.log('something wrong w post route')
     }
 }) 
-
-
-
+// text create route
 router.post('/create', upload.single('imageUpload'),  (req, res, next) => {
     let product = {
         url: req.body.url,
@@ -120,17 +112,7 @@ router.post('/create', upload.single('imageUpload'),  (req, res, next) => {
         console.log('no two')
     }
 })
-
-
-// && (req.body.url[req.body.url.length-5] == "." || req.body.url[req.body.url.length-4] == ".")
-
-
-
-let a = 'heybeans.jpeg'
-console.log(a[a.length-5])
-
-
-
+// update route with flag counter update integrated
 router.put('/:id', (req, res, next) => {
     let id = req.params.id
     if(req.body.url != '' || req.body.text != '') {
@@ -150,9 +132,7 @@ router.put('/:id', (req, res, next) => {
         console.log("include data to update")
     }
 })
-
-
-
+// delete route
 router.delete('/:id', (req, res) => {
     let id = req.params.id
     Media.findOneAndRemove({_id: id})

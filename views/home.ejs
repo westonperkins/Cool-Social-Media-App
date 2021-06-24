@@ -1,4 +1,4 @@
-
+<!-- creating a tags and rendering posts as they come in -->
 <div class="mainContainer">
     <div class="imageHolder">
     <% posts.forEach((post, i) => { %>
@@ -12,7 +12,7 @@
     <% }) %>
     </div>
     
-
+    <!-- creating modal for all incoming media to adopt for editing deleting and flag counter -->
     <% posts.forEach((post, i) => { %>
     <div id="<%= i %>" class="modal updateModal"  >
         <form id="test" class="modal-content" action="/<%= post.id %>?_method=PUT" method="POST" >
@@ -34,15 +34,16 @@
         </form>
     </div>
 </div>
+    <% }) %>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelector('.modal');
             var instances = M.Modal.init(elems, {});
             
         });
-        </script>
+    </script>
 
-    <% }) %>
 
 <%- include('../partials/create.ejs') %>
 

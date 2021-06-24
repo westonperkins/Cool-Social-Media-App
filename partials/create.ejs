@@ -11,16 +11,15 @@
 </div>
 
 
-
+<!-- text upload -->
 <div id="modal2" class="modal">
   <form id="text" class="modal-content textForm" action="/create" method="POST"  enctype="multipart/form-data" >
       <label for="text">Type words:</label>
-  
       <input type="text" name="text" value="" id="text" class="inputUpload">  
       <input type="submit" name="" id="submit" class="btn center-align waves-effect waves-light">
   </form>
 </div>
-
+<!-- url upload -->
 <div id="modal3" class="modal">
   <form id="url" class="modal-content urlForm" action="/create2" method="POST"  enctype="multipart/form-data" >
       <label for="url">Media URL plz:</label>
@@ -28,7 +27,7 @@
       <input type="submit" name="" id="submit" class="btn center-align waves-effect waves-light">
   </form>
 </div>
-
+<!-- uploadmedia locally upload -->
 <div id="modal4" class="modal">
   <form class="modal-content uploadForm" action="/create3" method="POST"  enctype="multipart/form-data" >
     <div class="file-field input-field">
@@ -43,7 +42,6 @@
       <input type="submit" name="" id="submit" class="btn center-align waves-effect waves-light submitUpload">
   </form>
 </div>
-
 
 
 <script>
