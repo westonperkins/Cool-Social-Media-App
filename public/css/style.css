@@ -114,3 +114,20 @@ max-width: 4rem;
     flex-direction: column;
 }
 
+.updateModal {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+/* 
+.flag {
+    position: absolute;
+    left: 270px;
+    bottom: 90px;
+}
+
+.deleteBtn {
+    position: absolute;
+    left: 470px;
+    bottom: 88px;
+} */

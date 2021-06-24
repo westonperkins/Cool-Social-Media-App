@@ -7,7 +7,8 @@ const mediaSchema = new mongoose.Schema(
         imageUpload: { data: Buffer, contentType: String },
         upload: Boolean,
         name: String,
-        flags: Number,
+        caption: String,
+        flag: { type: Number, min: 0, max: 5, default: 0},
     },
     { timestamps: true },
 )

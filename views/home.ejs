@@ -20,10 +20,17 @@
             <input type="text" name="text" value="" id="text"> 
             <label for="url">Edit Media URL:</label>
             <input type="text" name="url" id="url">
+            <p>
+              <label>
+                <input type="checkbox" class="filled-in" name="flag"/>
+                <span for="flag"><i class="material-icons">flag</i> <%= post.flag %> </span>
+              </label>
+            </p>
             <button type="submit" class="btn">Update</button>
         </form>
+   
         <form class="modal-content" action="/<%= post.id %>?_method=DELETE" method="POST">
-            <button type="submit" class="btn">Delete</button>
+            <button type="submit" class="btn deleteBtn">Delete</button>
         </form>
     </div>
 </div>
