@@ -13,46 +13,57 @@
 
 <!-- text upload -->
 <div id="modal2" class="modal">
-  <form id="text" class="modal-content textForm" action="/create" method="POST"  enctype="multipart/form-data" >
-      <input type="text" name="caption" class="caption">
-      <label for="caption">Caption:</label>
-      <input type="text" name="text" value="" id="text" class="inputUpload">  
-      <label for="text">Type words:</label>
-      <br>
-      <br>
-      <input type="submit" name="" id="submit" class="btn center-align waves-effect waves-light textURL">
-  </form>
-</div>
-<!-- url upload -->
-<div id="modal3" class="modal">
-  <form id="url" class="modal-content urlForm" action="/create2" method="POST"  enctype="multipart/form-data" >
-      <input type="text" name="caption" class="caption">
-      <label for="caption">Caption:</label>
-      <input type="text" name="url" id="url" class="inputUpload">
-      <label for="url">Media URL plz:</label>
-      <br>
-      <br>
-      <input type="submit" name="" id="submit" class="btn center-align waves-effect waves-light mediaURL">
-  </form>
-</div>
-<!-- uploadmedia locally upload -->
-<div id="modal4" class="modal">
-  <form class="modal-content uploadForm" action="/create3" method="POST"  enctype="multipart/form-data" >
-    <div class="file-field input-field">
+  <form id="text" class="modal-content textForm " action="/create" method="POST"  enctype="multipart/form-data" autocomplete="off">
       <div>
+        <input type="text" name="text" value="" id="text" class="inputUpload" required>  
+        <label for="text">Type words:</label>
         <input type="text" name="caption" class="caption">
         <label for="caption">Caption:</label>
       </div>
       <br>
+      <br>
+      <div class="center">
+        <!-- <input type="submit" name="" id="submit" class="btn center-align waves-effect waves-light textURL"> -->
+        <button class="btn waves-effect waves-light textURL" type="submit">Submit</button>
+      </div>
+  </form>
+</div>
+<!-- url upload -->
+<div id="modal3" class="modal">
+  <form id="url" class="modal-content urlForm " action="/create2" method="POST"  enctype="multipart/form-data" autocomplete="off">
+      <input type="text" name="url" id="url" class="inputUpload" required>
+      <label for="url">Media URL plz:</label>
+      <input type="text" name="caption" class="caption">
+      <label for="caption">Caption:</label>
+      <br>
+      <br>
+      <div class="center">
+        <!-- <input type="submit" name="" id="submit" class="btn center-align waves-effect waves-light mediaURL"> -->
+        <button class="btn waves-effect waves-light mediaURL" type="submit">Submit</button>
+      </div>
+  </form>
+</div>
+<!-- uploadmedia locally upload -->
+<div id="modal4" class="modal">
+  <form class="modal-content uploadForm " action="/create3" method="POST"  enctype="multipart/form-data" autocomplete="off">
+    <div class="file-field input-field">
+      <br>
       <div class="btn localmedia">
         <span class="uploadButton">Upload media</span>
-        <input type="file" name="imageUpload" class="inputUpload">
+        <input type="file" name="imageUpload" class="inputUpload" required>
       </div>
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
       </div>
     </div>
-      <input type="submit" name="" id="submit" class="btn center-align waves-effect waves-light submitUpload">
+    <div>
+      <input type="text" name="caption" class="caption">
+      <label for="caption">Caption:</label>
+    </div>
+    <div class="center">
+      <!-- <input type="submit" name="" id="submit" class="btn center-align waves-effect waves-light submitUpload"> -->
+      <button class="btn waves-effect waves-light submitUpload" type="submit">Submit</button>
+    </div>
   </form>
 </div>
 

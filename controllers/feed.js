@@ -23,6 +23,29 @@ const upload = multer({
     fileFilter: fileFilter
 })
 
+
+router.get('/login', (req, res) => {
+    res.render('login.ejs')
+})
+
+
+router.get('/register', (req, res) => {
+    res.render('register.ejs')
+})
+
+
+
+
+
+
+
+
+
+
+
+// APP FUNCTIONALITY STUFF
+
+
 // get route with conditional to check if the post has 5 flags
 router.get('/', (req, res) => {
     Media.find({}).sort({updatedAt:-1})
@@ -41,12 +64,12 @@ router.get('/', (req, res) => {
         })
 })
 // JSON route
-// router.get('/data', (req, res) => {
-//     Media.find({}, {imageUpload: 0})
-//         .then((data) => {
-//             res.json(data)
-//         })
-// })
+router.get('/data', (req, res) => {
+    Media.find({}, {imageUpload: 0})
+        .then((data) => {
+            res.json(data)
+        })
+})
 // URL create route
 router.post('/create2', upload.single('imageUpload'),  (req, res, next) => {
     let product = {
@@ -122,7 +145,10 @@ router.post('/create', upload.single('imageUpload'),  (req, res, next) => {
 // update route with flag counter update integrated
 router.put('/:id', (req, res, next) => {
     let id = req.params.id
-    if(req.body.url != '' || req.body.text != '') {
+    if(req.body.url != '' && req.body.text != '') {
+        console.log('you can only update one at a time')
+    }
+    else if(req.body.url != '' || req.body.text != '') {
     Media.findOneAndUpdate({_id: id}, { $set: { text: req.body.text, url: req.body.url }}, {new:true})
     .then((media) => {
         console.log(media)
@@ -131,7 +157,7 @@ router.put('/:id', (req, res, next) => {
     console.log('put')
     } 
     else if(req.body.caption != '') {
-    Media.findOneAndUpdate({_id: id}, { $set: { caption: req.body.caption }}, {new:true})
+    Media.updateOne({_id: id}, { $set: { caption: req.body.caption }}, {new:true})
     .then((media) => {
         console.log(media + " caption")
         res.redirect('/')
@@ -150,7 +176,8 @@ router.put('/:id', (req, res, next) => {
         console.log(media + " likes")
         res.redirect('/')
     })
-    } else {
+    } 
+    else {
         console.log("include data to update")
     }
 })

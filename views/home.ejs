@@ -15,14 +15,16 @@
     <!-- creating modal for all incoming media to adopt for editing deleting and flag counter -->
     <% posts.forEach((post, i) => { %>
     <div id="<%= i %>" class="modal updateModal"  >
-        <form id="test" class="modal-content" action="/<%= post.id %>?_method=PUT" method="POST" >
+        <form id="test" class="modal-content" action="/<%= post.id %>?_method=PUT" method="POST" autocomplete="off">
             <input type="text" name="caption" value="<%= post.caption %>" id="caption"> 
             <label for="caption">Edit Caption:</label>
-            <input type="text" name="text" value="  " id="text"> 
+            <input type="text" name="text" value="" id="text"> 
             <label for="text">Edit Text:</label>
             <input type="text" name="url" id="url">
             <label for="url">Edit Media URL:</label>
-            <p>
+            <br>
+            <br>
+            <p class="right">
               <label>
                 <input type="checkbox" class="filled-in" name="flag"/>
                 <span for="flag"><i class="material-icons">flag</i> <%= post.flag %> </span>
@@ -34,10 +36,14 @@
                 <span for="likes"><i class="material-icons">favorite</i> <%= post.likes %> </span>
             </label>
             </p>
-            <button type="submit" class="btn updateButton">Update</button>
+            <div class="center">
+                <button type="submit" class="btn updateButton">Update</button>
+            </div>
         </form>
-        <form class="modal-content" action="/<%= post.id %>?_method=DELETE" method="POST">
-            <button type="submit" class="btn deleteBtn">Delete</button>
+        <form class="modal-content" action="/<%= post.id %>?_method=DELETE" method="POST" autocomplete="off"> 
+            <div class="center">
+                <button type="submit" class="btn deleteBtn">Delete</button>
+            </div>
         </form>
     </div>
 </div>

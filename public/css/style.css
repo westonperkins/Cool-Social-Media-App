@@ -71,3 +71,7 @@ span {
 .updateButton {
     background-color: orangered !important;
 }
+
+.focus {
+    color: rgb(72, 117, 102) !important;
+}
