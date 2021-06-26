@@ -41,12 +41,12 @@ router.get('/', (req, res) => {
         })
 })
 // JSON route
-router.get('/data', (req, res) => {
-    Media.find({}, {imageUpload: 0})
-        .then((data) => {
-            res.json(data)
-        })
-})
+// router.get('/data', (req, res) => {
+//     Media.find({}, {imageUpload: 0})
+//         .then((data) => {
+//             res.json(data)
+//         })
+// })
 // URL create route
 router.post('/create2', upload.single('imageUpload'),  (req, res, next) => {
     let product = {
