@@ -52,6 +52,7 @@ router.post('/create2', upload.single('imageUpload'),  (req, res, next) => {
     let product = {
         url: req.body.url,
         text: req.body.text,
+        caption: req.body.caption
     }
     if(req.body.url != '') {
         Media.create(product)
@@ -77,6 +78,7 @@ router.post('/create3', upload.single('imageUpload'),  (req, res, next) => {
                     contentType: req.file.mimetype
                 },
                 upload: true,
+                caption: req.body.caption
             }
         
         Media.create(product)
@@ -91,11 +93,12 @@ router.post('/create3', upload.single('imageUpload'),  (req, res, next) => {
         console.log('something wrong w post route')
     }
 }) 
-// text create route
+// text create routez
 router.post('/create', upload.single('imageUpload'),  (req, res, next) => {
     let product = {
         url: req.body.url,
         text: req.body.text,
+        caption: req.body.caption
     }
 
     if(req.body.text != '') {
@@ -112,6 +115,10 @@ router.post('/create', upload.single('imageUpload'),  (req, res, next) => {
         console.log('no two')
     }
 })
+
+
+
+
 // update route with flag counter update integrated
 router.put('/:id', (req, res, next) => {
     let id = req.params.id
@@ -122,10 +129,25 @@ router.put('/:id', (req, res, next) => {
     })
     .then(res.redirect('/'))
     console.log('put')
-    } else if(req.body.flag == 'on') {
+    } 
+    else if(req.body.caption != '') {
+    Media.findOneAndUpdate({_id: id}, { $set: { caption: req.body.caption }}, {new:true})
+    .then((media) => {
+        console.log(media + " caption")
+        res.redirect('/')
+    })
+    }
+    else if(req.body.flag == 'on') {
     Media.findOneAndUpdate({_id:id}, { $inc: {flag: 1}})
     .then((media) => {
         console.log(media + " flags")
+        res.redirect('/')
+    })
+    } 
+    else if(req.body.likes == 'on') {
+    Media.findOneAndUpdate({_id:id}, { $inc: {likes: 1}})
+    .then((media) => {
+        console.log(media + " likes")
         res.redirect('/')
     })
     } else {

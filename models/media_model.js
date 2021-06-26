@@ -9,6 +9,8 @@ const mediaSchema = new mongoose.Schema(
         name: String,
         caption: String,
         flag: { type: Number, min: 0, max: 5, default: 0},
+        likes: { type: Number, min: 0, default: 0},
+        caption: String
     },
     { timestamps: true },
 )

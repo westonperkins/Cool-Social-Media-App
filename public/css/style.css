@@ -1,3 +1,5 @@
+
+
 body {
     background-color: white;
     display: flex;
@@ -41,4 +43,31 @@ img {
 }
 span {
     color: blue !important;
+}
+
+.textContainer {
+    display: inline-block;
+    max-width: 250px;
+    max-height: 200px;
+    overflow: scroll;
+}
+
+
+.uploadButton {
+    color: white !important;
+}
+.localmedia {
+    background-color: gray !important;
+
+}
+.submitUpload,
+.mediaURL,
+.textURL
+ {
+    background-color: orangered !important;
+}
+
+.deleteBtn,
+.updateButton {
+    background-color: orangered !important;
 }

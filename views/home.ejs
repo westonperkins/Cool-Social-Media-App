@@ -5,7 +5,7 @@
         <% if(post.url) { %>
         <a class="modal-trigger content" href="#<%= i %>" data-id=" <%= post.id %> "><img class="imageContent" src=" <%= post.url %>" alt=""></a>
     <% } else if (post.text) { %>
-        <a class=" modal-trigger content" href="#<%= i %>" data-id=" <%= post.id %> "><span class="textContent"> <%= post.text %> </span></a>
+        <a class=" modal-trigger content" href="#<%= i %>" data-id=" <%= post.id %> "><div class="textContainer"><span class="textContent"> <%= post.text %> </span></div></a>
     <% } else if (post.upload === true) { %>
         <a class=" modal-trigger content" href="#<%= i %>" data-id=" <%= post.id %> "><img class="uploadContent" src="data:image/<%=post.imageUpload.contentType%>;base64,<%=post.imageUpload.data.toString('base64')%>"> </a>
         <% } %>
@@ -16,19 +16,26 @@
     <% posts.forEach((post, i) => { %>
     <div id="<%= i %>" class="modal updateModal"  >
         <form id="test" class="modal-content" action="/<%= post.id %>?_method=PUT" method="POST" >
+            <input type="text" name="caption" value="<%= post.caption %>" id="caption"> 
+            <label for="caption">Edit Caption:</label>
+            <input type="text" name="text" value="  " id="text"> 
             <label for="text">Edit Text:</label>
-            <input type="text" name="text" value="" id="text"> 
-            <label for="url">Edit Media URL:</label>
             <input type="text" name="url" id="url">
+            <label for="url">Edit Media URL:</label>
             <p>
               <label>
                 <input type="checkbox" class="filled-in" name="flag"/>
                 <span for="flag"><i class="material-icons">flag</i> <%= post.flag %> </span>
               </label>
             </p>
-            <button type="submit" class="btn">Update</button>
+            <p>
+            <label>
+                <input type="checkbox" class="filled-in" name="likes"/>
+                <span for="likes"><i class="material-icons">favorite</i> <%= post.likes %> </span>
+            </label>
+            </p>
+            <button type="submit" class="btn updateButton">Update</button>
         </form>
-   
         <form class="modal-content" action="/<%= post.id %>?_method=DELETE" method="POST">
             <button type="submit" class="btn deleteBtn">Delete</button>
         </form>
