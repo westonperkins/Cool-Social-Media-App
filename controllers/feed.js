@@ -5,6 +5,9 @@ const multer = require('multer')
 const storage = multer.memoryStorage()
 
 const Media = require('../models/media_model')
+const Users = require('../models/users_models')
+
+const bcrypt = require('bcrypt')
 
 const fileFilter = (req, file, cb) => {
 
@@ -29,8 +32,17 @@ router.get('/login', (req, res) => {
 })
 
 
+router.post('/login', (req, res) => {
+
+})
+
+
 router.get('/register', (req, res) => {
     res.render('register.ejs')
+})
+
+router.post('/register', (req, res) => {
+    
 })
 
 

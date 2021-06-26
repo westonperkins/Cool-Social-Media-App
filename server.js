@@ -18,7 +18,7 @@ const { dirname } = require('path')
 app.use('/', feedController)
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(__dirname + "/public"))
 
