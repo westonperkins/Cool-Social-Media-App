@@ -35,14 +35,22 @@ max-width: 4rem;
 .imageHolder {
     display: inline-block;
     width: 100vw;
-    word-break: break-all
+    word-break: break-all;
+    flex-wrap: wrap;
+    
+}
+.mainContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 img {
     max-height: 200px;
     max-width: 200px;
+    object-fit: cover;
 }
 span {
     color: blue !important;
+    font-size: 2rem;
 }
 
 .textContainer {
@@ -74,4 +82,27 @@ span {
 
 .focus {
     color: rgb(72, 117, 102) !important;
+}
+
+
+
+.icons {
+    display: flex;
+    justify-content: space-between;   
+}
+
+.imageHolder {
+    display: flex;
+    flex-direction: row;
+}
+
+.textCard {
+    min-width: 200px !important;
+}
+
+.card {
+    width: 200px; 
+    display: inline-block;
+    margin-right: 5px !important;
+    margin-left: 5px !important;
 }

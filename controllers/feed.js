@@ -1,5 +1,11 @@
 const express = require('express')
 const router = express.Router()
+const passport = require('passport')
+const bcrypt = require('bcrypt')
+const session = require('express-session')
+const mongoose = require('mongoose')
+const localStrategy = require('passport-local')
+
 
 const multer = require('multer')
 const storage = multer.memoryStorage()
@@ -7,7 +13,46 @@ const storage = multer.memoryStorage()
 const Media = require('../models/media_model')
 const Users = require('../models/users_models')
 
-const bcrypt = require('bcrypt')
+// ------------------------------
+
+router.use(session({
+    secret: "testSecret",
+    resave: false,
+    saveUninitialized: true
+}))
+router.use(passport.initialize());
+router.use(passport.session());
+
+passport.serializeUser(function (user, done) {
+    done(null, user.id)
+})
+
+passport.deserializeUser((id, done) => {
+    Users.findById(id, function (err, user) {
+        done(err, user)
+    })
+}) 
+
+passport.use(new localStrategy(function (username, password, done) {
+    Users.findOne({ username: username }, function (err, user) {
+        if (err) return done(err)
+        if (!user) return done(null, false, { message: "Incorrect username"})
+
+        bcrypt.compare(password, user.password, function (err, res) {
+            if (err) return done(err)
+            if (res === false) {
+                return done(null, false, {message: "incorrect password"})
+            }
+            return done(null, user)
+        })
+    })
+}))
+
+
+
+
+
+// ------------------------------------
 
 const fileFilter = (req, file, cb) => {
 
@@ -25,7 +70,7 @@ const upload = multer({
     },
     fileFilter: fileFilter
 })
-
+// ---------------------
 
 router.get('/login', (req, res) => {
     res.render('login.ejs')
@@ -41,15 +86,23 @@ router.get('/register', (req, res) => {
     res.render('register.ejs')
 })
 
-router.post('/register', (req, res) => {
-    
+router.post('/register', async (req, res) => {
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        let userInfo = {
+            username: req.body.username,
+            email: req.body.email,
+            password: hashedPassword
+        }
+        Users.create(userInfo) 
+        .then((user) => {
+            console.log(user)
+        })
+        .then(res.redirect('/login'))
+    } catch {
+
+    }
 })
-
-
-
-
-
-
 
 
 
@@ -59,7 +112,7 @@ router.post('/register', (req, res) => {
 
 
 // get route with conditional to check if the post has 5 flags
-router.get('/', (req, res) => {
+router.get('/feed', (req, res) => {
     Media.find({}).sort({updatedAt:-1})
         .then((posts) => {
             posts.forEach((post) => {
@@ -69,19 +122,28 @@ router.get('/', (req, res) => {
                             console.log(media)
                             console.log('deleted')
                         })
-                        .then(res.redirect('/'))
+                        .then(res.redirect('/feed'))
                 }
             })    
             res.render('home.ejs', { posts: posts })
         })
 })
-// JSON route
+// JSON route media
 router.get('/data', (req, res) => {
     Media.find({}, {imageUpload: 0})
         .then((data) => {
             res.json(data)
         })
 })
+
+// JSON route users
+router.get('/dataUser', (req, res) => {
+    Users.find({})
+        .then((users) => {
+            res.json(users)
+        })
+})
+
 // URL create route
 router.post('/create2', upload.single('imageUpload'),  (req, res, next) => {
     let product = {
@@ -95,7 +157,7 @@ router.post('/create2', upload.single('imageUpload'),  (req, res, next) => {
             console.log(media)
             console.log("ew")
         })
-        .then(res.redirect('/'))
+        .then(res.redirect('/feed'))
         .then(console.log(req.body))
     } else {
         console.log('no')
@@ -119,7 +181,7 @@ router.post('/create3', upload.single('imageUpload'),  (req, res, next) => {
         Media.create(product)
         .then((media) => {
             console.log(media + " mediua")
-            res.redirect('/')
+            res.redirect('/feed')
             // undefined coming from line 84 ^
         })
     } 
@@ -141,7 +203,7 @@ router.post('/create', upload.single('imageUpload'),  (req, res, next) => {
         .then((media) => {
             console.log(media)
         })
-        .then(res.redirect('/'))
+        .then(res.redirect('/feed'))
         .then(console.log(req.body.text + " REQ"))
         .catch((err) => {
             console.log(err)
@@ -165,28 +227,28 @@ router.put('/:id', (req, res, next) => {
     .then((media) => {
         console.log(media)
     })
-    .then(res.redirect('/'))
+    .then(res.redirect('/feed'))
     console.log('put')
     } 
     else if(req.body.caption != '') {
     Media.updateOne({_id: id}, { $set: { caption: req.body.caption }}, {new:true})
     .then((media) => {
         console.log(media + " caption")
-        res.redirect('/')
+        res.redirect('/feed')
     })
     }
     else if(req.body.flag == 'on') {
     Media.findOneAndUpdate({_id:id}, { $inc: {flag: 1}})
     .then((media) => {
         console.log(media + " flags")
-        res.redirect('/')
+        res.redirect('/feed')
     })
     } 
     else if(req.body.likes == 'on') {
     Media.findOneAndUpdate({_id:id}, { $inc: {likes: 1}})
     .then((media) => {
         console.log(media + " likes")
-        res.redirect('/')
+        res.redirect('/feed')
     })
     } 
     else {
@@ -201,7 +263,7 @@ router.delete('/:id', (req, res) => {
         console.log(media)
         console.log('delete')
     })
-    .then(res.redirect('/'))
+    .then(res.redirect('/feed'))
 })
 
 
