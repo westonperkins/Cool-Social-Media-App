@@ -164,6 +164,7 @@ router.post('/create2', upload.single('imageUpload'),  (req, res, next) => {
     }
 
 })
+
 // imageUpload create route
 router.post('/create3', upload.single('imageUpload'),  (req, res, next) => {
     if(req.file != undefined) {
@@ -219,7 +220,21 @@ router.post('/create', upload.single('imageUpload'),  (req, res, next) => {
 // update route with flag counter update integrated
 router.put('/:id', (req, res, next) => {
     let id = req.params.id
-    if(req.body.url != '' && req.body.text != '') {
+    if(req.body.flag == 'on') {
+    Media.findOneAndUpdate({_id:id}, { $inc: {flag: 1}})
+    .then((media) => {
+        console.log(media + " flags")
+        res.redirect('/feed')
+    })
+    } 
+    else if(req.body.likes == 'on') {
+    Media.findOneAndUpdate({_id:id}, { $inc: {likes: 1}})
+    .then((media) => {
+        console.log(media + " likes")
+        res.redirect('/feed')
+    })
+    } 
+    else if(req.body.url != '' && req.body.text != '') {
         console.log('you can only update one at a time')
     }
     else if(req.body.url != '' || req.body.text != '') {
@@ -237,20 +252,6 @@ router.put('/:id', (req, res, next) => {
         res.redirect('/feed')
     })
     }
-    else if(req.body.flag == 'on') {
-    Media.findOneAndUpdate({_id:id}, { $inc: {flag: 1}})
-    .then((media) => {
-        console.log(media + " flags")
-        res.redirect('/feed')
-    })
-    } 
-    else if(req.body.likes == 'on') {
-    Media.findOneAndUpdate({_id:id}, { $inc: {likes: 1}})
-    .then((media) => {
-        console.log(media + " likes")
-        res.redirect('/feed')
-    })
-    } 
     else {
         console.log("include data to update")
     }

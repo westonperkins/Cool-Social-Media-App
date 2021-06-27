@@ -1,10 +1,15 @@
 <!-- creating a tags and rendering posts as they come in -->
 <div class="mainContainer">
     <div class="imageHolder">
+
+
+
+
+
     <% posts.forEach((post, i) => { %>
         <% if(post.url) { %>
-        <div class="card">
-            <div class="card-image waves-effect waves-block waves-light">
+        <div class="card ">
+            <div class="card-image waves-effect waves-block waves-light activator">
                 <img class="activator" src="<%= post.url %>">
             </div>
             <div style=" padding: 5px !important;"class="card-reveal">
@@ -18,13 +23,25 @@
                     <br>
                 <div class="icons">
                     <div class="left-align" style="display: inline-block !important;">
-                        <form method="POST" autocomplete="off" action="/<%= post.id %>?_method=PUT">
-                            <button style="background-color: white; border: none;"type="submit" ><i class="material-icons ">flag</i> <%= post.flag %></button>
+                        <form action="/<%= post.id %>?_method=PUT" method="POST" autocomplete="off" >
+                            <p>
+                                <label>
+                                  <input name="flag" id="indeterminate-checkbox" onChange="this.form.submit()" type="checkbox" />
+                                  <span><i class="material-icons ">flag</i> <%= post.flag %></span>
+                                </label>
+                            </p>
+                            <!-- <button style="background-color: white; border: none;"type="submit" ><i class="material-icons ">flag</i> <%= post.flag %></button> -->
                         </form>
                     </div>
                     <div class="right-align" style="display: inline-block !important;"> 
-                        <form method="POST" autocomplete="off" action="/<%= post.id %>?_method=PUT">
-                            <button style="background-color: white; border: none;"type="submit"><i class="material-icons">favorite_border</i> <%= post.likes %></button>
+                        <form action="/<%= post.id %>?_method=PUT" method="POST" autocomplete="off" >
+                            <p>
+                                <label>
+                                  <input name="likes" id="indeterminate-checkbox" onChange="this.form.submit()" type="checkbox" />
+                                  <span><i class="material-icons ">favorite_border</i> <%= post.likes %></span>
+                                </label>
+                            </p>
+                            <!-- <button style="background-color: white; border: none;"type="submit"><i class="material-icons">favorite_border</i> <%= post.likes %></button> -->
                         </form>
                     </div>
                 </div>
@@ -32,12 +49,19 @@
                     <p><%= post.caption %></p>
                 </div>
             </div>
-        </div>       
+        </div>   
+        
+        
+
+
+
+
+
     <% } else if (post.text) { %>
         <div class="card textCard activator">
-            <div class="card-image waves-effect waves-block waves-light">
-                <div  class="activator" style="max-height: 200px; max-width: 200px; overflow: scroll;">
-                    <span class="activator"> <%= post.text %> </span>
+            <div style="height: 200px; width: 200px;" class="card-image waves-effect waves-block waves-light activator">
+                <div class="activator" style="max-height: 200px; max-width: 200px; overflow: scroll;">
+                    <span style="max-height: 200px; " class="activator"> <%= post.text %> </span>
                 </div>
             </div>
             <div style="padding: 5px !important;"class="card-reveal">
@@ -51,14 +75,25 @@
                 <br>
                 <div class="icons">
                     <div class="left-align" style="display: inline-block !important;">
-                        <form method="POST" autocomplete="off" action="/<%= post.id %>?_method=PUT">
-                            <button style="background-color: white; border: none;"type="submit" ><i class="material-icons ">flag</i> <%= post.flag %></button>
+                        <form method="POST" autocomplete="off" action="/<%= post.id %>?_method=PUT"> 
+                            <p>
+                                <label>
+                                  <input name="flag" id="indeterminate-checkbox" onChange="this.form.submit()" type="checkbox" />
+                                  <span><i class="material-icons ">flag</i> <%= post.flag %></span>
+                                </label>
+                            </p>
+                            <!-- <button style="background-color: white; border: none;"type="submit" class="test2"> <input type="checkbox" checked="checked" /><i class="material-icons ">flag</i> <%= post.flag %></button> -->
                         </form>
                     </div>
-                    
                     <div class="right-align" style="display: inline-block !important;"> 
                         <form method="POST" autocomplete="off" action="/<%= post.id %>?_method=PUT">
-                            <button style="background-color: white; border: none;"type="submit"><i class="material-icons">favorite_border</i> <%= post.likes %></button>
+                            <p>
+                                <label>
+                                  <input name="likes" id="indeterminate-checkbox" onChange="this.form.submit()" type="checkbox" />
+                                  <span><i class="material-icons ">favorite_border</i> <%= post.likes %></span>
+                                </label>
+                            </p>
+                            <!-- <button style="background-color: white; border: none;"type="submit"><i class="material-icons">favorite_border</i> <%= post.likes %></button> -->
                         </form>
                     </div>
                 </div>
@@ -69,9 +104,18 @@
             </div>
         </div>   
         <!-- <a class=" modal-trigger content" href="#<%= i %>" data-id=" <%= post.id %> "><div class="textContainer"><span class="textContent"> <%= post.text %> </span></div></a> -->
+
+
+
+
+
+
+
+
+
     <% } else if (post.upload === true) { %>
-        <div class="card">
-            <div class="card-image waves-effect waves-block waves-light">
+        <div class="card activator">
+            <div style="height: 200px; width: 200px;" class="activator card-image waves-effect waves-block waves-light">
                 <img class="activator" src="data:image/<%=post.imageUpload.contentType%>;base64,<%=post.imageUpload.data.toString('base64')%>">
             </div>
             <div style=" padding: 5px !important;"class="card-reveal">
@@ -86,12 +130,24 @@
                 <div class="icons">
                     <div class="left-align" style="display: inline-block !important;">
                         <form method="POST" autocomplete="off" action="/<%= post.id %>?_method=PUT">
-                            <button style="background-color: white; border: none;"type="submit" ><i class="material-icons ">flag</i> <%= post.flag %></button>
+                            <p>
+                                <label>
+                                  <input name="flag" id="indeterminate-checkbox" onChange="this.form.submit()" type="checkbox"  />
+                                  <span><i class="material-icons ">favorite_border</i> <%= post.flag %></span>
+                                </label>
+                            </p>
+                            <!-- <button style="background-color: white; border: none;"type="submit" ><i class="material-icons ">flag</i> <%= post.flag %></button> -->
                         </form>
                     </div>
                     <div class="right-align" style="display: inline-block !important;"> 
                         <form method="POST" autocomplete="off" action="/<%= post.id %>?_method=PUT">
-                            <button style="background-color: white; border: none;"type="submit"><i class="material-icons">favorite_border</i> <%= post.likes %></button>
+                            <p>
+                                <label>
+                                  <input name="likes" id="indeterminate-checkbox" onChange="this.form.submit()" type="checkbox" />
+                                  <span><i class="material-icons ">favorite_border</i> <%= post.likes %></span>
+                                </label>
+                            </p>
+                            <!-- <button style="background-color: white; border: none;"type="submit"><i class="material-icons">favorite_border</i> <%= post.likes %></button> -->
                         </form>
                     </div>
                 </div>
@@ -105,6 +161,13 @@
     <% }) %>
     </div>
     
+    
+
+
+
+
+
+
     <!-- creating modal for all incoming media to adopt for editing deleting and flag counter -->
     <% posts.forEach((post, i) => { %>
     <div id="<%= i %>" class="modal updateModal">
