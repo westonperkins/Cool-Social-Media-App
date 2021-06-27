@@ -8,21 +8,21 @@
 
     <% posts.forEach((post, i) => { %>
         <% if(post.url) { %>
-        <div class="card ">
-            <div class="card-image waves-effect waves-block waves-light activator">
-                <img class="activator" src="<%= post.url %>">
+        <div class="card urlCard">
+            <div class="card-image waves-effect waves-block waves-light activator postURL">
+                <img class="activator urlImage" src="<%= post.url %>">
             </div>
-            <div style=" padding: 5px !important;"class="card-reveal">
-                <div style="padding: 0 !important;"class="card-content">
+            <div class="card-reveal">
+                <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">close</i></span>
                 </div>
-                <button class="btn ">
-                    <a class="modal-trigger content" style="color: black !important;" href="#<%= i %>" data-id=" <%= post.id %> ">EDIT</a>
+                <button class="btn editBtn">
+                    <a class="modal-trigger content"  href="#<%= i %>" data-id=" <%= post.id %> ">EDIT</a>
                 </button>
                     <br>
                     <br>
                 <div class="icons">
-                    <div class="left-align" style="display: inline-block !important;">
+                    <div class="left-align urlFlag" >
                         <form action="/<%= post.id %>?_method=PUT" method="POST" autocomplete="off" >
                             <p>
                                 <label>
@@ -33,7 +33,7 @@
                             <!-- <button style="background-color: white; border: none;"type="submit" ><i class="material-icons ">flag</i> <%= post.flag %></button> -->
                         </form>
                     </div>
-                    <div class="right-align" style="display: inline-block !important;"> 
+                    <div class="right-align urlLike" > 
                         <form action="/<%= post.id %>?_method=PUT" method="POST" autocomplete="off" >
                             <p>
                                 <label>
@@ -45,6 +45,7 @@
                         </form>
                     </div>
                 </div>
+                <hr>
                 <div>
                     <p><%= post.caption %></p>
                 </div>
@@ -59,22 +60,22 @@
 
     <% } else if (post.text) { %>
         <div class="card textCard activator">
-            <div style="height: 200px; width: 200px;" class="card-image waves-effect waves-block waves-light activator">
-                <div class="activator" style="max-height: 200px; max-width: 200px; overflow: scroll;">
-                    <span style="max-height: 200px; " class="activator"> <%= post.text %> </span>
+            <div class="card-image waves-effect waves-block waves-light activator postText">
+                <div class="activator textDisplayDiv">
+                    <span class="activator textDisplaySpan"> <%= post.text %> </span>
                 </div>
             </div>
-            <div style="padding: 5px !important;"class="card-reveal">
-                <div style="padding: 0 !important;"class="card-content">
+            <div class="card-reveal cardRevText">
+                <div class="card-content cardContText">
                     <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">close</i></span>
                 </div>
-                <button class="btn ">
-                    <a class="modal-trigger content" style="color: black !important;" href="#<%= i %>" data-id=" <%= post.id %> ">EDIT</a>
+                <button class="btn editBtn left-align">
+                    <a class="modal-trigger content editButtonText" href="#<%= i %>" data-id=" <%= post.id %> ">EDIT</a>
                 </button>
                 <br>
                 <br>
                 <div class="icons">
-                    <div class="left-align" style="display: inline-block !important;">
+                    <div class="left-align div textFlagMainDiv" >
                         <form method="POST" autocomplete="off" action="/<%= post.id %>?_method=PUT"> 
                             <p>
                                 <label>
@@ -85,7 +86,7 @@
                             <!-- <button style="background-color: white; border: none;"type="submit" class="test2"> <input type="checkbox" checked="checked" /><i class="material-icons ">flag</i> <%= post.flag %></button> -->
                         </form>
                     </div>
-                    <div class="right-align" style="display: inline-block !important;"> 
+                    <div class="right-align textLikeMainDiv"> 
                         <form method="POST" autocomplete="off" action="/<%= post.id %>?_method=PUT">
                             <p>
                                 <label>
@@ -97,13 +98,14 @@
                         </form>
                     </div>
                 </div>
+                <hr>
                 <div>
                     <p><%= post.caption %></p>
                 </div>
                 
             </div>
         </div>   
-        <!-- <a class=" modal-trigger content" href="#<%= i %>" data-id=" <%= post.id %> "><div class="textContainer"><span class="textContent"> <%= post.text %> </span></div></a> -->
+    
 
 
 
@@ -114,21 +116,21 @@
 
 
     <% } else if (post.upload === true) { %>
-        <div class="card activator">
-            <div style="height: 200px; width: 200px;" class="activator card-image waves-effect waves-block waves-light">
+        <div class="card activator uploadCard">
+            <div class="activator card-image waves-effect waves-block waves-light postUpload">
                 <img class="activator" src="data:image/<%=post.imageUpload.contentType%>;base64,<%=post.imageUpload.data.toString('base64')%>">
             </div>
-            <div style=" padding: 5px !important;"class="card-reveal">
-                <div style="padding: 0 !important;"class="card-content">
+            <div class="card-reveal cardRevUpload">
+                <div class="card-content cardContUpload">
                     <span class="card-title activator grey-text text-darken-4"><i class="material-icons right">close</i></span>
                 </div>
-                <button class="btn ">
-                    <a class="modal-trigger content" style="color: black !important;" href="#<%= i %>" data-id=" <%= post.id %> ">EDIT</a>
+                <button class="btn editBtn">
+                    <a class="modal-trigger content editButtonUpload" href="#<%= i %>" data-id=" <%= post.id %> ">EDIT</a>
                 </button>
                 <br>
                 <br>
                 <div class="icons">
-                    <div class="left-align" style="display: inline-block !important;">
+                    <div class="left-align uploadFlagMainDiv">
                         <form method="POST" autocomplete="off" action="/<%= post.id %>?_method=PUT">
                             <p>
                                 <label>
@@ -139,7 +141,7 @@
                             <!-- <button style="background-color: white; border: none;"type="submit" ><i class="material-icons ">flag</i> <%= post.flag %></button> -->
                         </form>
                     </div>
-                    <div class="right-align" style="display: inline-block !important;"> 
+                    <div class="right-align uploadLikeMainDiv"> 
                         <form method="POST" autocomplete="off" action="/<%= post.id %>?_method=PUT">
                             <p>
                                 <label>
@@ -151,6 +153,7 @@
                         </form>
                     </div>
                 </div>
+                <hr>
                 <div>
                     <p><%= post.caption %></p>
                 </div>
@@ -171,20 +174,20 @@
     <!-- creating modal for all incoming media to adopt for editing deleting and flag counter -->
     <% posts.forEach((post, i) => { %>
     <div id="<%= i %>" class="modal updateModal">
-        <form style="padding-bottom: 0 !important;" id="test" class="modal-content" action="/<%= post.id %>?_method=PUT" method="POST" autocomplete="off">
+        <form id="test" class="modal-content editMenu" action="/<%= post.id %>?_method=PUT" method="POST" autocomplete="off">
+            <input type="text" name="text" value="<%= post.text %>" id="text"> 
+            <label for="text">Edit Text:</label>
+            <input type="text" name="url" value="<%= post.url %>" id="url">
+            <label for="url">Edit Media URL:</label>
             <input type="text" name="caption" value="<%= post.caption %>" id="caption"> 
             <label for="caption">Edit Caption:</label>
-            <input type="text" name="text" value="" id="text"> 
-            <label for="text">Edit Text:</label>
-            <input type="text" name="url" id="url">
-            <label for="url">Edit Media URL:</label>
             <br>
             <br>
             <div class="center">
                 <button type="submit" class="btn updateButton">Update</button>
             </div>
         </form>
-        <form style="padding-top: 0 !important;"class="modal-content" action="/<%= post.id %>?_method=DELETE" method="POST" autocomplete="off"> 
+        <form class="modal-content deleteForm" action="/<%= post.id %>?_method=DELETE" method="POST" autocomplete="off"> 
             <div class="right-align">
                 <button type="submit" class="btn deleteBtn"><i class="material-icons">delete_forever</i></button>
             </div>
