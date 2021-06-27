@@ -2,6 +2,8 @@ body {
     background-color: white;
     display: flex;
     flex-direction: column;
+    background-image: url('../uploads/coolsocial.png');
+    background-size: cover;
     
 }
 .class {
@@ -14,7 +16,7 @@ body {
     /* border: double black; */
     margin: 1vh auto;
     overflow: scroll;
-    background-color: white;
+   
     align-items: flex-start;
     display: flex;
     flex-wrap: wrap;
@@ -34,7 +36,8 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 210px));
     grid-template-rows: repeat(auto-fit, minmax(200px, 210px));
-    border: double black;
+    /* border: double black; */
+   
     
 }
 .content {
