@@ -2,7 +2,7 @@ body {
     background-color: white;
     display: flex;
     flex-direction: column;
-    background-image: url('../uploads/coolsocial.png');
+    /* background-image: url('../uploads/coolsocial.png'); */
     background-size: cover;
     
 }
@@ -185,4 +185,15 @@ span.activator {
 
 .deleteForm {
     padding-top: 0 !important;
+}
+
+
+/* log */
+
+.logout {
+    width: 5rem;
+    margin: 5px;
+    border: double black;
+    display: flex;
+    justify-content: center;
 }

@@ -14,72 +14,6 @@ const storage = multer.memoryStorage()
 const Media = require('../models/media_model')
 const Users = require('../models/users_models')
 
-// PASSPORT------------------------------
-
-router.use(session({
-    secret: "testSecret",
-    resave: false,
-    saveUninitialized: true
-}))
-router.use(passport.initialize());
-router.use(passport.session());
-
-passport.serializeUser(function (user, done) {
-    done(null, user.id)
-})
-
-passport.deserializeUser((id, done) => {
-    Users.findById(id, function (err, user) {
-        done(err, user)
-    })
-}) 
-
-passport.use(new localStrategy(function (username, password, done) {
-    Users.findOne({ username: username }, function (err, user) {
-        if (err) return done(err)
-        if (!user) return done(null, false, { message: "Incorrect username"})
-        bcrypt.compare(password, user.password, function (err, res) {
-            if (err) return done(err)
-            if (res === false) {
-                return done(null, false, {message: "incorrect password"})
-            }
-            return done(null, user)
-        })
-    })
-}))
-
-
-
-// passport.use(new LocalStrategy(
-//   function(username, password, done) {
-//     Users.findOne({ username: username }, function(err, user) {
-//       if (err) { return done(err); }
-//       if (!user) {
-//         return done(null, false, { message: 'Incorrect username.' });
-//       }
-//       if (!user.validPassword(password)) {
-//         return done(null, false, { message: 'Incorrect password.' });
-//       }
-//       return done(null, user);
-//     });
-//   }
-// ));
-
-// router.post('/login',
-//   passport.authenticate('local', { successRedirect: '/',
-//                                    failureRedirect: '/login',
-//                                    failureFlash: true})
-// );
-
-
-// passport.use(new LocalStrategy({
-//     usernameField: 'email',
-//     passwordField: 'passwd'
-//   },
-//   function(username, password, done) {
-//     // ...
-//   }
-// ));
 
 
 
@@ -104,21 +38,79 @@ const upload = multer({
 
 
 
+
+
+// PASSPORT------------------------------
+
+router.use(session({
+    secret: "testSecret",
+    resave: false,
+    saveUninitialized: true
+}))
+
+router.use(passport.initialize());
+router.use(passport.session());
+
+passport.serializeUser((user, done) => {
+    done(null, user.id)
+})
+
+passport.deserializeUser((id, done) => {
+    Users.findById(id, (err, user) => {
+        done(err, user)
+    })
+}) 
+
+passport.use(new localStrategy((username, password, done) => {
+    Users.findOne({ username: username }, (err, user) => {
+        if (err) return done(err)
+        if (!user) return done(null, false, { message: "Incorrect username"})
+        
+        bcrypt.compare(password, user.password, (err, res) => {
+            if (err) return done(err)
+            if (res === false) {
+                return done(null, false, {message: "incorrect password"})
+            }
+            return done(null, user)
+        })
+    })
+}))
+
+function isLoggedIn(req, res, next) {
+	if (req.isAuthenticated()) return next();
+	res.redirect('/login');
+    console.log(req.isAuthenticated())
+}
+
+function isLoggedOut(req, res, next) {
+	if (!req.isAuthenticated()) return next();
+	res.redirect('/');
+}
+
+
 // LOGIN  REGISTER---------------------
 
-router.get('/login', (req, res) => {
-    res.render('login.ejs')
-})
-
-
-router.post('/login', (req, res) => {
-
-})
-
+router.get('/login', isLoggedOut, (req, res) => {
+	const response = {
+		title: "Login",
+		error: req.query.error
+	}
+	res.render('login');
+});
 
 router.get('/register', (req, res) => {
     res.render('register.ejs')
 })
+
+router.post('/login', passport.authenticate('local', {
+	successRedirect: '/',
+	failureRedirect: '/login?error=true'
+}));
+
+router.get('/logout', function (req, res){
+	req.logout();
+	res.redirect('/');
+});
 
 router.post('/register', async (req, res) => {
     try {
@@ -145,7 +137,7 @@ router.post('/register', async (req, res) => {
 
 
 // get route with conditional to check if the post has 5 flags
-router.get('/', (req, res) => {
+router.get('/', isLoggedIn, (req, res) => {
     Media.find({}).sort({updatedAt:-1})
         .then((posts) => {
             posts.forEach((post) => {
@@ -166,7 +158,7 @@ router.get('/', (req, res) => {
 
 
 // JSON route media
-router.get('/data', (req, res) => {
+router.get('/data', isLoggedIn, (req, res) => {
     Media.find({}, {imageUpload: 0})
         .then((data) => {
             res.json(data)
@@ -174,7 +166,7 @@ router.get('/data', (req, res) => {
 })
 
 // JSON route users
-router.get('/dataUser', (req, res) => {
+router.get('/dataUser', isLoggedIn, (req, res) => {
     Users.find({})
         .then((users) => {
             res.json(users)
@@ -200,7 +192,7 @@ router.post('/create2', upload.single('imageUpload'),  (req, res, next) => {
             console.log("ew")
         })
         .then(res.redirect('/'))
-        .then(console.log(req.body))
+        .then(console.log(req.body)) 
     } else {
         console.log('no')
     }
@@ -227,6 +219,8 @@ router.post('/create3', upload.single('imageUpload'),  (req, res, next) => {
             res.redirect('/')
             // undefined coming from line 84 ^
         })
+        .then(res.redirect('/'))
+        
     } 
     
     else {

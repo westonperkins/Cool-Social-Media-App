@@ -1,4 +1,9 @@
+<%- include('../partials/logout.ejs') %>
+
+
 <!-- creating a tags and rendering posts as they come in -->
+
+
 <div class="mainContainer">
     <div class="imageHolder">
 
@@ -175,11 +180,11 @@
     <% posts.forEach((post, i) => { %>
     <div id="<%= i %>" class="modal updateModal">
         <form id="test" class="modal-content editMenu" action="/<%= post.id %>?_method=PUT" method="POST" autocomplete="off">
-            <input type="text" name="text" value="<%= post.text %>" id="text"> 
+            <input type="text" name="text"  id="text" placeholder="<%=post.text%>"> 
             <label for="text">Edit Text:</label>
-            <input type="text" name="url" value="<%= post.url %>" id="url">
+            <input type="text" name="url"  id="url" placeholder="<%=post.url%>">
             <label for="url">Edit Media URL:</label>
-            <input type="text" name="caption" value="<%= post.caption %>" id="caption"> 
+            <input type="text" name="caption"  id="caption" placeholder=" <%=post.caption %>"> 
             <label for="caption">Edit Caption:</label>
             <br>
             <br>
@@ -204,8 +209,10 @@
         });
     </script>
 
-
+<!-- <button class="btn left-align logout"><a href="/logout">log out</a></button> -->
 <%- include('../partials/create.ejs') %>
+
+
 
 
 
