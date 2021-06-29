@@ -92,13 +92,10 @@ function isLoggedOut(req, res, next) {
 }
 
 
+
 // LOGIN  REGISTER---------------------
 
 router.get('/login', isLoggedOut, (req, res) => {
-	const response = {
-		title: "Login",
-		error: req.query.error
-	}
 	res.render('login');
 });
 
