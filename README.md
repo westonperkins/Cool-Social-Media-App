@@ -17,20 +17,22 @@
 - Mongoose 
 - Mongo __ database
 - Materialize __ styling
+- Heroku
+- AtlasDB
 
 --- 
 
 ### General Inspiration / Consideration 
 
-
-
+<!-- There are plenty of social media apps avaliable at this time, they all seemingly offer different things to some degree but they all have a general concept of having a "page" that you currate and attempt 
+ -->
 
 ---
 
 ### WireFrames 
 
 ##### Pre Build
-
+<!-- 
 ![image](/public/uploads/wireframe_social.png)
 ![image](/public/uploads/wireframe_social_2.png)
 
@@ -39,13 +41,14 @@
 ![image](/public/uploads/login.png)
 ![image](/public/uploads/app_screenshot.png)
 ![image](/public/uploads/cardshot.png)
-![image](/public/uploads/editmodal.png)
+![image](/public/uploads/editmodal.png) -->
 
 
 ---
 
 ### User Stories 
 
+The user should be able to create an account which will allow them to view the feed, post within it, edit, like, and flag. Ideally the user should only be able to edit content that they have posted and
 
 
 
@@ -59,7 +62,7 @@
 
 - Error messages handled better in general
 
-
+- Make the ability to like and flag less clunky
 
 
 ---
