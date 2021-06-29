@@ -220,3 +220,10 @@ a {
     color: purple !important;
 }
 
+
+.postText {
+    background-image: url('../uploads/Untitled-1.png');
+    background-position: center;
+    background-size: cover;
+  
+}
