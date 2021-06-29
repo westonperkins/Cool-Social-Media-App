@@ -76,15 +76,19 @@ passport.use(new localStrategy((username, password, done) => {
     })
 }))
 
+
+
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) return next();
 	res.redirect('/login');
-    console.log(req.isAuthenticated())
+    console.log('hi')
+
 }
 
 function isLoggedOut(req, res, next) {
 	if (!req.isAuthenticated()) return next();
 	res.redirect('/');
+    console.log('he')
 }
 
 
@@ -99,7 +103,7 @@ router.get('/login', isLoggedOut, (req, res) => {
 });
 
 router.get('/register', (req, res) => {
-    res.render('register.ejs')
+    res.render('register')
 })
 
 router.post('/login', passport.authenticate('local', {
@@ -172,9 +176,6 @@ router.get('/dataUser', isLoggedIn, (req, res) => {
             res.json(users)
         })
 })
-
-
-
 
 
 

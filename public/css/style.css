@@ -2,7 +2,7 @@ body {
     background-color: white;
     display: flex;
     flex-direction: column;
-    /* background-image: url('../uploads/coolsocial.png'); */
+    background-image: url('../uploads/Untitled-1.png');
     background-size: cover;
     
 }
@@ -191,9 +191,32 @@ span.activator {
 /* log */
 
 .logout {
-    width: 5rem;
+    width: 6rem;
     margin: 5px;
-    border: double black;
+    /* border: double black; */
     display: flex;
     justify-content: center;
+    
 }
+
+.btn {
+    background-color: tan !important;
+    color: purple !important;
+}
+
+.logouttext {
+    color: purple !important;
+    
+}
+.uploadButton {
+    color: purple !important;
+}
+a {
+    color: purple !important;
+}
+.editButtonUpload,
+.editButtonText,
+.editButtonUrl {
+    color: purple !important;
+}
+
