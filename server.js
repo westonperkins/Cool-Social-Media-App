@@ -9,6 +9,8 @@ app.use(ejsLayouts)
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 const session = require('express-session')
+const flash = require('express-flash')
+
 
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())

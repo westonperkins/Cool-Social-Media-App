@@ -4,7 +4,8 @@ const passport = require('passport')
 const bcrypt = require('bcrypt')
 const session = require('express-session')
 const mongoose = require('mongoose')
-const localStrategy = require('passport-local')
+const localStrategy = require('passport-local').Strategy
+const flash = require('express-flash')
 
 
 const multer = require('multer')
@@ -13,7 +14,7 @@ const storage = multer.memoryStorage()
 const Media = require('../models/media_model')
 const Users = require('../models/users_models')
 
-// ------------------------------
+// PASSPORT------------------------------
 
 router.use(session({
     secret: "testSecret",
@@ -37,7 +38,6 @@ passport.use(new localStrategy(function (username, password, done) {
     Users.findOne({ username: username }, function (err, user) {
         if (err) return done(err)
         if (!user) return done(null, false, { message: "Incorrect username"})
-
         bcrypt.compare(password, user.password, function (err, res) {
             if (err) return done(err)
             if (res === false) {
@@ -50,9 +50,40 @@ passport.use(new localStrategy(function (username, password, done) {
 
 
 
+// passport.use(new LocalStrategy(
+//   function(username, password, done) {
+//     Users.findOne({ username: username }, function(err, user) {
+//       if (err) { return done(err); }
+//       if (!user) {
+//         return done(null, false, { message: 'Incorrect username.' });
+//       }
+//       if (!user.validPassword(password)) {
+//         return done(null, false, { message: 'Incorrect password.' });
+//       }
+//       return done(null, user);
+//     });
+//   }
+// ));
+
+// router.post('/login',
+//   passport.authenticate('local', { successRedirect: '/',
+//                                    failureRedirect: '/login',
+//                                    failureFlash: true})
+// );
 
 
-// ------------------------------------
+// passport.use(new LocalStrategy({
+//     usernameField: 'email',
+//     passwordField: 'passwd'
+//   },
+//   function(username, password, done) {
+//     // ...
+//   }
+// ));
+
+
+
+// MULTER ------------------------------------
 
 const fileFilter = (req, file, cb) => {
 
@@ -70,7 +101,10 @@ const upload = multer({
     },
     fileFilter: fileFilter
 })
-// ---------------------
+
+
+
+// LOGIN  REGISTER---------------------
 
 router.get('/login', (req, res) => {
     res.render('login.ejs')
@@ -127,6 +161,10 @@ router.get('/', (req, res) => {
             res.render('home.ejs', { posts: posts })
         })
 })
+
+
+
+
 // JSON route media
 router.get('/data', (req, res) => {
     Media.find({}, {imageUpload: 0})
@@ -142,6 +180,11 @@ router.get('/dataUser', (req, res) => {
             res.json(users)
         })
 })
+
+
+
+
+
 
 // URL create route
 router.post('/create2', upload.single('imageUpload'),  (req, res, next) => {
@@ -190,6 +233,7 @@ router.post('/create3', upload.single('imageUpload'),  (req, res, next) => {
         console.log('something wrong w post route')
     }
 }) 
+
 // text create routez
 router.post('/create', upload.single('imageUpload'),  (req, res, next) => {
     let product = {
@@ -219,38 +263,38 @@ router.post('/create', upload.single('imageUpload'),  (req, res, next) => {
 // update route with flag counter update integrated
 router.put('/:id', (req, res, next) => {
     let id = req.params.id
+    if(req.body.url != '' && req.body.text != '') {
+       console.log('you can only update one at a time')
+    }
     if(req.body.flag == 'on') {
-    Media.findOneAndUpdate({_id:id}, { $inc: {flag: 1}})
+    Media.findOneAndUpdate({_id:id}, { $inc: {flag: 1}},{new:true})
     .then((media) => {
         console.log(media + " flags")
-        res.redirect('/')
     })
+    .then(res.redirect('/'))
     } 
-    else if(req.body.likes == 'on') {
-    Media.findOneAndUpdate({_id:id}, { $inc: {likes: 1}})
+     if(req.body.likes == 'on') {
+    Media.findOneAndUpdate({_id:id}, { $inc: {likes: 1}},{new:true})
     .then((media) => {
         console.log(media + " likes")
-        res.redirect('/')
     })
+    .then(res.redirect('/'))
     } 
-    else if(req.body.url != '' && req.body.text != '') {
-        console.log('you can only update one at a time')
+    if (req.body.caption != '') {
+    Media.updateOne({_id: id}, { $set: { caption: req.body.caption }}, {new:true})
+    .then((media) => {
+       console.log(media + " caption")
+    })
+    .then(res.redirect('/'))
     }
-    else if(req.body.url != '' || req.body.text != '') {
+     if(req.body.url != '' || req.body.text != '') {
     Media.findOneAndUpdate({_id: id}, { $set: { text: req.body.text, url: req.body.url }}, {new:true})
     .then((media) => {
-        console.log(media)
+       console.log(media + "heyyyy") 
     })
     .then(res.redirect('/'))
     console.log('put')
     } 
-    else if(req.body.caption != '') {
-    Media.updateOne({_id: id}, { $set: { caption: req.body.caption }}, {new:true})
-    .then((media) => {
-        console.log(media + " caption")
-        res.redirect('/')
-    })
-    }
     else {
         console.log("include data to update")
     }
