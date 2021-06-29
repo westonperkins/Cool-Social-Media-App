@@ -32,7 +32,7 @@
 ### WireFrames 
 
 ##### Pre Build
-<!-- 
+
 ![image](/public/uploads/wireframe_social.png)
 ![image](/public/uploads/wireframe_social_2.png)
 
@@ -41,7 +41,7 @@
 ![image](/public/uploads/login.png)
 ![image](/public/uploads/app_screenshot.png)
 ![image](/public/uploads/cardshot.png)
-![image](/public/uploads/editmodal.png) -->
+![image](/public/uploads/editmodal.png)
 
 
 ---
