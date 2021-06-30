@@ -160,7 +160,7 @@ router.get('/', isLoggedIn, (req, res) => {
 
 // JSON route media
 router.get('/data', isLoggedIn, (req, res) => {
-    Media.find({}, {imageUpload: 0})
+    Media.find({})
         .then((data) => {
             res.json(data)
         })
