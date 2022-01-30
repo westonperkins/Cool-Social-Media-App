@@ -1,12 +1,29 @@
 
 
-## Cool-Social-Media-App ©
-
-###### Start Posting:
-###### https://cool-social-media-app.herokuapp.com/login
+<b> Cool-Social-Media-App ©</b>
+<u>[Start Posting](https://cool-social-media-app.herokuapp.com/login)</u>
 ---
+<hr>
+<b>TOC</b>
 
-##### Technologies Used: 
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+  - [Technologies Used](#technologies-used)
+- [General Inspiration / Consideration](#general-inspiration-consideration)
+- [WireFrames](#wireframes)
+  - [Pre Build](#ipre-buildi)
+  - [Post Build](#ipost-buildi)
+- [User Stories](#user-stories)
+- [Unsolved Problems](#unsolved-problems)
+- [Future Advances](#future-advances)
+
+<!-- /code_chunk_output -->
+
+<hr>
+
+#### Technologies Used
 - Javascript
 - CSS
 - Express
@@ -15,29 +32,26 @@
 - Passport __  user authentication
 - EJS __ view engine
 - Mongoose 
-- Mongo __ database
+- MongoDB
 - Materialize __ styling
 - Heroku
-- AtlasDB
 
 --- 
 
 ### General Inspiration / Consideration 
 
-The idea for this application is somewhat around the concept of: what if everyone was in a group chat. You have group chats with friends that encorporate various subject matter but for me at least, my group chat of 20-30 people (with some people ive never met in person) consists mainly of memes, what might be going on around us if something seems cool, music, and random photos/videos/voicememos (a lot are just 2 seconds of someone screaming into the mic or something stupid). The point being you just have one large feed where everyone can post. It is not formal it is not about gaining a cult following around a profile where you post photos of yourself. The idea is just i guess to use this sort of machine in whichever way you see fit/potentially benefitial. I like to keep a lot of things seperate. A main problem with my group chat on iMessage is that if i get a text im normally waiting for something related to work or for making plans. I would prefer that when i get a text it has to do with something of that nature instead of getting spammed with the black and white hippo in the home survaillence camera 40 times. (if that meme is dead by the time you read this then just replace hippo with whatever meme is relevant). Either way I would like to have a clean seperation of concerns when it comes to people trying to reach me or me getting in the crossfire of random stuff that comes with being in a group chat with 40 dudes who just talk about nothing and send memes. I get "do not disturb" but i also dont even like to see a red bubble with a number inside it. To say i believe we, as a society, will view people who have 300 unread texts as borderline insane within the next decades isnt far off. Email, sure, its hard to regulate spam and frankly who wants to go through all that but typically if someone has your number they know you personally or at least have an adjacent relationship with you but regardless this is a tangent. Here is the idea: The app is like a large group caht except the group chat is everyone.. Eventually i would like to make it so you can create personal rooms and add people to those rooms so they are clsoed off from the rest of the world. OR you have geographical rooms, where you have rooms by area code, or city or whatever. That could be cool and just get interesting insight as to whats going on around you or a weird anonymous look at other anonymous people that live by you. And so, you can post whatever you want and then eventually you can comment on it. Maybe someone posts a flier for a show and goes: "is anyone going to this" and then you can comment, like, share, do all that stuff. I think it has relatively solid potential. No carving through the fog of fit pics and selfies, and if you want just link your other social media pages to your page but there wont be a typical posts log on your feed or anything because thats not what its for. If you don't see the value in this maybe get a group chat with friends and tell them to all more friends and just shitpost on there for a while. If that doesn't sound appealing, then wait for the next pandemic, im sure it will then. 
-
-(sorry for the typos if there are any i dont think markdown has a spell check)
+The idea for this application is somewhat around the concept of a large groupchat, something maybe a little more personal than a typical social media "feed". You have group chats with friends that encorporate various subject matter but for me at least, my group chat of 20-30 people (with some people ive never met in person) consists mainly of memes, what might be going on around us if something seems cool, music, and random photos/videos/voicememos. The point being you just have one large feed where everyone can post. It is not formal it is not about gaining a cult following around a profile where you post photos of yourself. The idea is just i guess to use this sort of machine in whichever way you see fit/potentially benefitial. I like to keep a lot of things seperate. I would like to have a clean seperation of concerns when it comes to people trying to reach me or me getting in the crossfire of random stuff that comes with being in a group chat with 40 dudes who just talk about nothing and send memes. I get "do not disturb" but i also dont even like to see a red bubble with a number inside it. Here is the idea: The app is like a large group chat except the group chat is everyone.. Eventually i would like to make it so you can create personal rooms and add people to those rooms so they are clsoed off from the rest of the world. OR you have geographical rooms, where you have rooms by area code, or city or whatever. That could be cool and just get interesting insight as to whats going on around you or a weird anonymous look at other anonymous people that live by you. And so, you can post whatever you want and then eventually you can comment on it. Perhaps a synthesis of Reddit, clubhouse, and snapchat. Maybe someone posts a flier for a show and goes: "is anyone going to this" and then you can comment, like, share, do all that stuff. I think it has relatively solid potential. No carving through the fog of fit pics and selfies, and if you want just link your other social media pages to your page. There wont be a typical posts log on your feed or anything because thats not what its for.
 
 ---
 
 ### WireFrames 
 
-##### Pre Build
+#### <i>Pre Build</i>
 
 ![image](/public/uploads/wireframe_social.png)
 ![image](/public/uploads/wireframe_social_2.png)
 
-##### Post Build
+#### <i>Post Build</i>
 
 ![image](/public/uploads/login.png)
 ![image](/public/uploads/app_screenshot.png)
